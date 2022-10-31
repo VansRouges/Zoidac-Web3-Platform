@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import slide from '../images/slide.png'
 import { GalleryData } from '../GalleryData';
-import { useEffect, useState } from 'react';
 
 
 export default function Index() {
@@ -12,11 +11,11 @@ export default function Index() {
 
   useEffect(()=>{
     setData(GalleryData);
-    setCollection([... new Set(GalleryData.map((item)=> item.titile))])
+    setCollection([... new Set(GalleryData.map((item)=> item.title))])
   },[]) 
 
   const gallery_filter = (itemData) =>{
-    const filterData = GalleryData.filter((item)=> item.titile == itemData);
+    const filterData = GalleryData.filter((item)=> item.title == itemData);
     setData(filterData);
   }
 
@@ -103,16 +102,19 @@ export default function Index() {
         <h1 className='text-4xl font-bold mb-5'>Explore Amazing Artworks</h1>
         <div className="galleryWrapper p-5">
           <div className="filterItem">
-            <ul className='flex items-center justify-center list-none p-0 gap-1 mb-9'>
-              <li><button className='text-[#000324] bg-white uppercase px-6 py-2 cursor-pointer rounded-lg' onClick={()=> setData(GalleryData)}>All items</button></li>
+            <ul className='flex items-center justify-center list-none p-0 mb-9 overflow-hidden overflow-x-scroll scrollbar-thumb-purple-600 scrollbar-track-purple-400 scrollbar-hidden hover:scrollbar-thin'>
+              <li><button className='mb-2 text-[#000324] ml-60 bg-white uppercase px-9 py-2 cursor-pointer rounded-lg' onClick={()=> setData(GalleryData)}>All</button></li>
               {
-                collection.map((item)=> <li><button className='text-white cursor-pointer uppercase px-9 py-2 rounded-3xl' onClick={()=>{gallery_filter(item)}}>{item}</button></li>)
+                collection.map((item)=> <li><button className='text-white cursor-pointer uppercase px-8 py-2 rounded-3xl' onClick={()=>{gallery_filter(item)}}>{item}</button></li>)
               }
             </ul>
           </div>
           <div className="grid grid-cols-4 gap-5">
             {
-              data.map((item)=> <div  key={item.id} className="galleryItem"><img className='rounded-2xl object-cover h-52 w-full' src={item.image} /></div> )
+              data.map((item)=> <div key={item.id} className="">
+                  <img className='rounded-3xl object-cover h-52 w-full' src={item.image} />
+                </div> 
+                )
             }
           </div>
       </div>
