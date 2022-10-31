@@ -103,7 +103,7 @@ export default function Index() {
         <div className="galleryWrapper p-5">
           <div className="filterItem">
             <ul className='flex items-center justify-center list-none p-0 mb-9 overflow-hidden overflow-x-scroll scrollbar-thumb-purple-600 scrollbar-track-purple-400 scrollbar-hidden hover:scrollbar-thin'>
-              <li><button className='mb-2 text-[#000324] ml-60 bg-white uppercase px-9 py-2 cursor-pointer rounded-lg' onClick={()=> setData(GalleryData)}>All</button></li>
+              <li><button className='mb-2 text-[#000324] bg-white uppercase px-9 py-2 cursor-pointer rounded-lg' onClick={()=> setData(GalleryData)}>All</button></li>
               {
                 collection.map((item)=> <li><button className='text-white cursor-pointer uppercase px-8 py-2 rounded-3xl' onClick={()=>{gallery_filter(item)}}>{item}</button></li>)
               }
