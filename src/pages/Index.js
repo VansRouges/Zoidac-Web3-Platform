@@ -6,6 +6,8 @@ import { GalleryData } from '../GalleryData';
 
 export default function Index() {
 
+/***********************      Gallery       ******************/ 
+
   const [data,setData] = useState([]);
   const [collection,setCollection] = useState([]);
 
@@ -18,6 +20,55 @@ export default function Index() {
     const filterData = GalleryData.filter((item)=> item.title == itemData);
     setData(filterData);
   }
+
+ /***********************      Testimonials       ******************/ 
+
+  const [index, setIndex] = useState(0);
+
+  const mod = (n, m) => {
+    let result = n % m;
+
+    // Return a positive value
+    return result >= 0 ? result : result + m;
+  };
+
+  const cards = [
+    {
+      id: "1",
+      commentHead:"The Best NFT Marketplace",
+      comment: "Zoidac is the best NFT Market place there is. The main benefit of non-fungible tokens is the ability to prove ownership.",
+      image:"https://images.unsplash.com/photo-1544168190-79c17527004f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+      person:"Mo Park",
+      company:"CEO Raba Enterprises",
+      stars:"⭐️⭐️⭐️⭐️⭐️",
+    },
+    {
+      id: "2",
+      commentHead:"Unique Blockchhain",
+      comment: "Because NFTs operate on a blockchain network, they can aid in the assignment of property to a specific fund. ",
+      image:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+      person:"Mo Park",
+      company:"CEO Raba Enterprises",
+      stars:"⭐️⭐️⭐️⭐️",
+    },
+    {
+      id: "3",
+      commentHead:"Unique Blockchhain",
+      comment: "Because NFTs operate on a blockchain network, they can aid in the assignment of property to a specific fund. ",
+      image:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
+      person:"Mo Park",
+      company:"CEO Raba Enterprises",
+      stars:"⭐️⭐️⭐️⭐️",
+    },
+  ];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIndex((index + 1) % cards.length);
+      console.log(index);
+    }, 3000);
+  }, [index]);
+
 
   return (
     <>
@@ -119,6 +170,49 @@ export default function Index() {
           </div>
       </div>
       </motion.div>
+      <div className='bg-[#000324] text-white w-full p-10 h-screen'>
+          <div className='bg-[#3A1E6366] w-full h-96 mt-10 p-4 rounded-lg'>
+            <div className='carousel w-full h-full relative'>
+            <h1 className='text-3xl ml-5 font-bold'>What are people saying?</h1>
+
+            {cards.map((item, i) => {
+              const indexLeft = mod(index - 1, cards.length);
+              const indexRight = mod(index + 1, cards.length);
+
+              let className = "card";
+
+              if (i === index) {
+                className = "card card--active";
+              } else if (i === indexRight) {
+                className = "card card--right";
+              } else if (i === indexLeft) {
+                className = "card card--left";
+              } else className = "card";
+
+              return (
+                <div
+                  key={item.id}
+                  className={className}
+                  alt="Comic"
+                >
+                  <h2 className='text-white font-bold text-xl tracking-wider text-center'>{item.commentHead}</h2>
+                  <p className='text-white text-center p-2 my-3'>{item.comment}</p>
+                  <div className='bg-white w-[220px] h-[60px] flex m-auto text-xs'>
+                      <div className='w-[40%]'>
+                        <img className='w-16 h-16 object-cover p-2 m-auto rounded-full' src={item.image} />
+                      </div>
+                      <div className="w-[60%]">
+                        <p className='font-bold text-black tracking-wider text-lg'>{item.person}</p>
+                        <p className='text-black'>{item.company}</p>
+                        <p className='tracking-widest'>{item.stars}</p>
+                      </div>
+                    </div>
+                </div>
+              );
+            })}
+            </div>
+          </div>
+      </div>
     </>
   )
 }
