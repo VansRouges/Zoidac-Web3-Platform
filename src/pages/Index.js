@@ -69,6 +69,37 @@ export default function Index() {
     }, 3000);
   }, [index]);
 
+/***********************      slider      ******************/ 
+const [slider, setSlider] = useState(0);
+
+  const mods = (n, m) => {
+    let res = n % m;
+
+    // Return a positive value
+    return res >= 0 ? res : res + m;
+  };
+
+  const cardes = [
+    {
+      id: "1",
+      image: slide,
+    },
+    {
+      id: "2",
+      image:"https://images.unsplash.com/photo-1608386964123-6b2cee22ea73?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dW5zcGFsc2h8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+    },
+    {
+      id: "3",
+      image:"https://images.unsplash.com/photo-1623237954710-0564b420ea27?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dW5zcGFsc2h8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
+    },
+  ];
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIndex((slider + 1) % cardes.length);
+      console.log(slider);
+    }, 3500);
+  }, [slider]);
 
   return (
     <>
@@ -77,7 +108,7 @@ export default function Index() {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
         className='bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] 
-        from-[#000324] via-purple-900 to-[#000324] h-[450px] grid grid-cols-2 gap-4 p-10
+        from-[#000324] via-purple-900 to-[#000324] h-[450px] grid grid-cols-2 gap-2 p-10
       '>
         <div className='p-2 py-10'>
           <motion.h1
@@ -115,8 +146,8 @@ export default function Index() {
           </motion.div>
         </div>
 
-        <div className='bg-black'>
-          <motion.img
+        <div className='w-full relative'>
+          {/* <motion.img
             initial={{
               x:200,
               opacity:0,
@@ -126,7 +157,30 @@ export default function Index() {
             viewport={{ once:true }}
             src={slide}
             className='w-40'
-          />
+          /> */}
+          {cardes.map((item, i) => {
+              const indexLeft = mod(index - 1, cardes.length);
+              const indexRight = mod(index + 1, cardes.length);
+
+              let className = "imageCard";
+
+              if (i === index) {
+                className = "imageCard imageCard--active";
+              } else if (i === indexRight) {
+                className = "imageCard imageCard--right";
+              } else if (i === indexLeft) {
+                className = "imageCard imageCard--left";
+              } else className = "imageCard";
+
+              return (
+                <img
+                  key={item.id}
+                  className={className}
+                  src={item.image}
+                  alt="Comic"
+                />
+              );
+            })}
         </div>
       </motion.div>
       <div className='bg-[#000324] bg-gradient-to-l from-[#000324] via-[#000324] to-purple-900 w-full h-24 text-white flex justify-evenly p-4'>
@@ -172,7 +226,7 @@ export default function Index() {
       </motion.div>
       <div className='bg-[#000324] text-white w-full p-10 h-screen'>
           <div className='bg-[#3A1E6366] w-full h-96 mt-10 p-4 rounded-lg'>
-            <div className='carousel w-full h-full relative'>
+            <div className='w-full h-full relative'>
             <h1 className='text-3xl ml-5 font-bold'>What are people saying?</h1>
 
             {cards.map((item, i) => {
