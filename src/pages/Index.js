@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import slide from '../images/slide.png'
 import { GalleryData } from '../GalleryData';
+import Item from '../components/Item';
+import { QuickLinks, Company } from '../components/Menus';
+import { SocialIcon } from "react-social-icons"
 
 
 export default function Index() {
@@ -13,11 +16,11 @@ export default function Index() {
 
   useEffect(()=>{
     setData(GalleryData);
-    setCollection([... new Set(GalleryData.map((item)=> item.title))])
+    setCollection([...new Set(GalleryData.map((item)=> item.title))])
   },[]) 
 
   const gallery_filter = (itemData) =>{
-    const filterData = GalleryData.filter((item)=> item.title == itemData);
+    const filterData = GalleryData.filter((item)=> item.title === itemData);
     setData(filterData);
   }
 
@@ -44,7 +47,7 @@ export default function Index() {
     },
     {
       id: "2",
-      commentHead:"Unique Blockchhain",
+      commentHead:"Unique Blockchain",
       comment: "Because NFTs operate on a blockchain network, they can aid in the assignment of property to a specific fund. ",
       image:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
       person:"Mo Park",
@@ -53,7 +56,7 @@ export default function Index() {
     },
     {
       id: "3",
-      commentHead:"Unique Blockchhain",
+      commentHead:"Unique Blockchain",
       comment: "Because NFTs operate on a blockchain network, they can aid in the assignment of property to a specific fund. ",
       image:"https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60",
       person:"Mo Park",
@@ -72,12 +75,12 @@ export default function Index() {
 /***********************      slider      ******************/ 
 const [slider, setSlider] = useState(0);
 
-  const mods = (n, m) => {
-    let res = n % m;
+  // const mods = (n, m) => {
+  //   let res = n % m;
 
-    // Return a positive value
-    return res >= 0 ? res : res + m;
-  };
+  //   // Return a positive value
+  //   return res >= 0 ? res : res + m;
+  // };
 
   const cardes = [
     {
@@ -217,7 +220,7 @@ const [slider, setSlider] = useState(0);
           <div className="grid grid-cols-4 gap-5">
             {
               data.map((item)=> <div key={item.id} className="">
-                  <img className='rounded-3xl object-cover h-52 w-full' src={item.image} />
+                  <img className='rounded-3xl object-cover h-52 w-full' src={item.image} alt='' />
                 </div> 
                 )
             }
@@ -253,7 +256,7 @@ const [slider, setSlider] = useState(0);
                   <p className='text-white text-center p-2 my-3'>{item.comment}</p>
                   <div className='bg-white w-[220px] h-[60px] flex m-auto text-xs'>
                       <div className='w-[40%]'>
-                        <img className='w-16 h-16 object-cover p-2 m-auto rounded-full' src={item.image} />
+                        <img className='w-16 h-16 object-cover p-2 m-auto rounded-full' src={item.image} alt='' />
                       </div>
                       <div className="w-[60%]">
                         <p className='font-bold text-black tracking-wider text-lg'>{item.person}</p>
@@ -267,6 +270,45 @@ const [slider, setSlider] = useState(0);
             </div>
           </div>
       </div>
+      <hr className='bg-white w-100' />
+      <footer className='bg-[#000324] w-100 h-70 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:px-8 px-5 py-16'>
+        <div>
+          <div className='w-36 cursor-pointer mb-5'>
+            <h1 className='px-2 text-xl font-extrabold tracking-wide text-white' >ZOI<span className='text-[#CB22A6]'>DAC</span></h1>
+          </div>
+          <p className='text-white mb-2'>Build anything you can dream of without writing code or spending high budget hiring a developer.</p>
+          <div className='flex mb-10 flex-row items-center w-36 justify-around'>
+            <SocialIcon
+                style={{width:"30px",height:"30px"}}
+                url='https://twitter.com/vancebillions' 
+                fgColor='white' 
+                bgColor='#CB22A6' 
+            />
+            <SocialIcon
+                style={{width:"30px",height:"30px"}}
+                url='https://instagram.com/VansRouges/'
+                fgColor='white' 
+                bgColor='#CB22A6' 
+            />
+            <SocialIcon
+                style={{width:"30px",height:"30px"}}
+                className='cursor-pointer'
+                network='email'
+                fgColor='white'
+                bgColor='#CB22A6'
+            />
+            <SocialIcon
+                style={{width:"30px",height:"30px"}}
+                url='https://www.linkedin.com/authwall?trk=bf&trkInfo=AQFIwFAckM7ACAAAAYQWFiGgcUVk0-wCKhjoGeKt7V3Hf0p7wR13cT-RqAsEvNJNBngbNbeTHAuAycfgJjsf5CaikALrqQVrnRODlfm9VB_1tfSuv7ij1qLX54xVedzCc4gaJUA=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fevans-agina-a3b69b219%2F'
+                fgColor='white' 
+                bgColor='#CB22A6' 
+            />
+          </div>
+          <h5 className='text-white text-xs'>Copyright 2021. Nocode Academy</h5>
+        </div>
+        <Item Links={QuickLinks} title="Quick Links" />
+        <Item Links={Company} title="Company" />
+      </footer>
     </>
   )
 }
