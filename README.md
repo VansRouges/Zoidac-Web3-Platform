@@ -8,7 +8,7 @@ Zoidac is a decentralized Market making use of Web3 technologies aimed at enabli
 ## Technologies
 * React.js
 * Tailwind
-* React-icons
+* React-social-icons
 * React-router-dom
 * Google Fonts
 * Framer motion
