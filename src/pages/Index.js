@@ -4,8 +4,7 @@ import slide from '../images/slide.png'
 import { GalleryData } from '../GalleryData';
 import Item from '../components/Item';
 import { QuickLinks, Company } from '../components/Menus';
-import { SocialIcon } from "react-social-icons"
-
+import Zoidac from '../components/zoidac'
 
 export default function Index() {
 
@@ -271,43 +270,13 @@ const [slider, setSlider] = useState(0);
           </div>
       </div>
       <hr className='bg-white w-100' />
-      <footer className='bg-[#000324] w-100 h-70 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:px-8 px-5 py-16'>
-        <div>
-          <div className='w-36 cursor-pointer mb-5'>
-            <h1 className='px-2 text-xl font-extrabold tracking-wide text-white' >ZOI<span className='text-[#CB22A6]'>DAC</span></h1>
-          </div>
-          <p className='text-white mb-2'>Build anything you can dream of without writing code or spending high budget hiring a developer.</p>
-          <div className='flex mb-10 flex-row items-center w-36 justify-around'>
-            <SocialIcon
-                style={{width:"30px",height:"30px"}}
-                url='https://twitter.com/vancebillions' 
-                fgColor='white' 
-                bgColor='#CB22A6' 
-            />
-            <SocialIcon
-                style={{width:"30px",height:"30px"}}
-                url='https://instagram.com/VansRouges/'
-                fgColor='white' 
-                bgColor='#CB22A6' 
-            />
-            <SocialIcon
-                style={{width:"30px",height:"30px"}}
-                className='cursor-pointer'
-                network='email'
-                fgColor='white'
-                bgColor='#CB22A6'
-            />
-            <SocialIcon
-                style={{width:"30px",height:"30px"}}
-                url='https://www.linkedin.com/authwall?trk=bf&trkInfo=AQFIwFAckM7ACAAAAYQWFiGgcUVk0-wCKhjoGeKt7V3Hf0p7wR13cT-RqAsEvNJNBngbNbeTHAuAycfgJjsf5CaikALrqQVrnRODlfm9VB_1tfSuv7ij1qLX54xVedzCc4gaJUA=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fevans-agina-a3b69b219%2F'
-                fgColor='white' 
-                bgColor='#CB22A6' 
-            />
-          </div>
-          <h5 className='text-white text-xs'>Copyright 2021. Nocode Academy</h5>
+      <footer className='bg-[#000324] w-100 h-70 flex justify-center items-center'>
+        <div className='grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:px-36 px-8 py-16 space-x-28'>
+          <Zoidac />
+          <Item Links={QuickLinks} title="Quick Links" />
+          <Item Links={Company} title="Company" />
         </div>
-        <Item Links={QuickLinks} title="Quick Links" />
-        <Item Links={Company} title="Company" />
+        
       </footer>
     </>
   )
